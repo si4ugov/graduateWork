@@ -1,0 +1,64 @@
+﻿<Window x:Class="withDBSql.RatingWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:withDBSql"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+         Title="Оценки" Height="450" Width="1000">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10">
+            <TextBlock Text="Выберите курс:" VerticalAlignment="Center"/>
+            <ComboBox x:Name="comboBox_Courses" Width="650" Margin="10,0">
+                <ComboBoxItem >КПК «Методика формирования навыков безопасного участия в дорожном движении обучающихся, осваивающих образовательные программы начального общего образования»</ComboBoxItem>
+                <ComboBoxItem >КПК «Построение индивидуальной образовательной траектории учащихся, одаренных в области физики»</ComboBoxItem>
+                <ComboBoxItem >КПК «Использование возможностей современных образовательных онлайн-платформ в образовательном процессе (на уровне основного и среднего общего образования)»</ComboBoxItem>
+            </ComboBox>
+            <Button Content="Подтвердить" Click="Confirm_Click" Margin="10,0"/>
+        </StackPanel>
+
+
+        <!--<ListView x:Name="listOfUsers" Margin="0"></ListView>-->
+        <DataGrid x:Name="dataGrid_Groups" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows="False" Margin="10" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="idCol" Header="Id" Binding="{Binding Path=Id}" Width="50"/>
+                <DataGridTextColumn x:Name="nameCol" Header="Имя" Binding="{Binding Path=Name}" Width="100"/>
+                <DataGridTextColumn x:Name="secNamCol" Header="Фамилия" Binding="{Binding Path=SecondName}" Width="100"/>
+                <DataGridTextColumn x:Name="surNanCol" Header="Отчество" Binding="{Binding Path=SurnameName}" Width="100"/>
+                <DataGridTextColumn x:Name="kursCol" Header="Курс" Binding="{Binding Path=Kurs}" Width="200"/>
+                <DataGridComboBoxColumn x:Name="RatingCol" Header="Оценка" SelectedValueBinding="{Binding Path=Rating}" Width="200">
+                    <DataGridComboBoxColumn.ItemsSource>
+                        <x:Array Type="{x:Type sys:String}">
+                            <sys:String>Отлично</sys:String>
+                            <sys:String>Хорошо</sys:String>
+                            <sys:String>Удовлетворительно</sys:String>
+                            <sys:String>Неудовлетворительно</sys:String>
+                        </x:Array>
+                    </DataGridComboBoxColumn.ItemsSource>
+                </DataGridComboBoxColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
+        
+        <!--<DataGrid x:Name="dataGrid_Groups" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows="False" Margin="10" SelectionMode="Single" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Студенты" Binding="{Binding Path=GroupName}" Width="*" />
+                <DataGridTextColumn x:Name="textBlock_Count" Header="Оценки" Binding="{Binding Path=Count}" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>-->
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+            <Button Content="Выгрузка в Excel" Click="Creat_Excel" Margin="10 0 580 0" Background="Green" HorizontalAlignment="Left"/>
+            <Button Content="Сохранить" Click="Save_Click" Margin="10,0"/>
+            <Button Content="Отменить" Click="Cancel_Click" Margin="10,0"/>
+        </StackPanel>
+
+    </Grid>
+</Window>
